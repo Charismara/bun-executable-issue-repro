@@ -1,0 +1,26 @@
+diff --git a/lib/branches/normalize.js b/lib/branches/normalize.js
+index b6650993a7624d4a0cd0b0977352b28c58f57992..23f2743555b421a8abfde646a04a80dfd164bd64 100644
+--- a/lib/branches/normalize.js
++++ b/lib/branches/normalize.js
+@@ -91,7 +91,7 @@ export function release({ release }) {
+ 
+ export function prerelease({ prerelease }) {
+   return prerelease.map(({ name, prerelease, channel, tags, ...rest }) => {
+-    const preid = prerelease === true ? name : prerelease;
++    const preid = prerelease === true ? name.replaceAll("/", "-") : prerelease;
+     return {
+       ...rest,
+       channel: isNil(channel) ? name : channel,
+diff --git a/lib/definitions/branches.js b/lib/definitions/branches.js
+index 09f814e50a8e2916e57180f493549b7d8b4dabdd..f8e9bd0d692678b540f57c647a20f3c4a1d0a13b 100644
+--- a/lib/definitions/branches.js
++++ b/lib/definitions/branches.js
+@@ -11,7 +11,7 @@ export const maintenance = {
+ export const prerelease = {
+   filter: ({ prerelease }) => !isNil(prerelease) && prerelease !== false,
+   branchValidator: ({ name, prerelease }) =>
+-    Boolean(prerelease) && Boolean(semver.valid(`1.0.0-${prerelease === true ? name : prerelease}.1`)),
++    Boolean(prerelease) && Boolean(semver.valid(`1.0.0-${prerelease === true ? name.includes("/") ? name.replaceAll("/", "-") : name : prerelease}.1`)),
+   branchesValidator: (branches) => uniqBy(branches, "prerelease").length === branches.length,
+ };
+

@@ -1,0 +1,29 @@
+{
+  "name": "semantic-release-cli",
+  "module": "index.ts",
+  "type": "module",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/lodash-es": "^4.17.12"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "index.ts",
+    "src"
+  ],
+  "dependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "arg": "^5.0.2",
+    "lodash-es": "^4.17.21",
+    "ms": "^2.1.3",
+    "semantic-release": "^24.2.3",
+    "semantic-release-plugin": "workspace:*"
+  },
+  "patchedDependencies": {
+    "semantic-release@24.2.3": "patches/semantic-release@24.2.3.patch"
+  }
+}

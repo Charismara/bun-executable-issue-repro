@@ -1,0 +1,12 @@
+{
+  "name": "workspace",
+  "private": "true",
+  "type": "module",
+  "workspaces": [
+    "cli-util",
+    "plugin"
+  ],
+  "patchedDependencies": {
+    "semantic-release@24.2.3": "patches/semantic-release@24.2.3.patch"
+  }
+}
